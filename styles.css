@@ -87,5 +87,22 @@
           width: 100%;
           margin-left: 10px;
         }
+      
+       #CounterVisitor {
+          height: 50px;
+          width: 80px;
+          background-color: #ff4957;
+          color: white;
+          border-radius: 30px;
+          font-weight: 700;
+          font-size: 25px;
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+       }
+
       }
+
       
