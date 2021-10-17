@@ -12,7 +12,7 @@ counts++;
 localStorage.setItem("on_load_counter", counts);
 
 
-document.getElementById('CounterVisitor').innerHTML = counts;
+document.getElementById('website-counter').innerHTML = counts;
 
 
 
