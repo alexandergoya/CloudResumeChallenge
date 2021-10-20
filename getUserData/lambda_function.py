@@ -1,5 +1,6 @@
-import json
 import boto3
+import json
+from boto3.dynamodb.conditions import Key, Attr
 
 def lambda_handler(event, context):
 
@@ -9,12 +10,34 @@ def lambda_handler(event, context):
     # Create the DynamoDB table.
     table = dynamodb.Table('CrcDb')
 
-    table.put_item(
-   Item={
-        'count': '5',
-    }
-)
-
+    response = table.get_item(
+        Key={
+            'count': '2'
+        }
+    )
+    #print(response['Item'])
+    # item = response[Item.NewValue]
+    # if item == None:
+    #     item = 0
+    # item += 1
+    #print(item)
+    response = table.query(
+        KeyConditionExpression=Key('count').eq('2')
+    )
+    # Extract results
+    items = response['Items']
+    for item in items:
+        NewValue = 1 + item['NewValue']
+        print('----------')
+        print(str(NewValue))
+        print('--------------')
     
-    # Print out some data about the table.
-    print(table.item_count)
+    table.update_item(
+        Key={
+            'count': '2'
+        },
+        UpdateExpression='SET NewValue = :val1',
+        ExpressionAttributeValues={
+            ':val1': NewValue
+        }
+    )
